@@ -9,7 +9,7 @@ Template.editPage.events({
       title: $(e.target).find('[name=title]').val()
     };
 
-    Meteor.update(currentPostId, {$set: postProperties}, function (error) {
+    Posts.update(currentPostId, {$set: postProperties}, function (error) {
       if (error)
         return alert(error.reason);
       else
