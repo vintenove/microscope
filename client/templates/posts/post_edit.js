@@ -9,11 +9,22 @@ Template.editPage.events({
       title: $(e.target).find('[name=title]').val()
     };
 
-    Posts.update(currentPostId, {$set: postProperties}, function (error) {
+    Meteor.call('postEdit', postProperties, function (error, result) {
       if (error)
         return alert(error.reason);
-      else
-        Router.go('postPage', {_id : currentPostId});
+
+      if (result.postExist) {
+        alert("Post exists already");
+        Router.go('postPage', {_id : result._id});
+      } else {
+        Posts.update(currentPostId, {$set: postProperties}, function (error, result) {
+          if (error)
+            return alert(error.reason);
+          else {
+            Router.go('postPage', {_id : currentPostId});
+          }
+        });
+      }
     });
   },
 
