@@ -19,7 +19,7 @@ Template.editPage.events({
       } else {
         Posts.update(currentPostId, {$set: postProperties}, function (error, result) {
           if (error)
-            return alert(error.reason);
+            return throwError(error.reason);
           else {
             Router.go('postPage', {_id : currentPostId});
           }
