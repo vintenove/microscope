@@ -14,7 +14,7 @@ Template.editPage.events({
         return throwError(error.reason);
 
       if (result.postExist) {
-        alert("Post exists already");
+        throwError("Post exists already");
         Router.go('postPage', {_id : result._id});
       } else {
         Posts.update(currentPostId, {$set: postProperties}, function (error, result) {
