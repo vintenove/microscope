@@ -9,7 +9,7 @@ Template.postSubmit.events({
 
     Meteor.call('postInsert', post, function (error, result) {
       if (error)
-        return alert(error.reason);
+        return throwError(error.reason);
 
       if (result.postExist)
         throwError('This link has already been posted');

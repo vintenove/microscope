@@ -11,7 +11,7 @@ Template.editPage.events({
 
     Meteor.call('postEdit', postProperties, function (error, result) {
       if (error)
-        return alert(error.reason);
+        return throwError(error.reason);
 
       if (result.postExist) {
         alert("Post exists already");
