@@ -6,6 +6,9 @@ Template.postSubmit.events({
       url: $(e.target).find('[name=url]').val(),
       title: $(e.target).find('[name=title]').val()
     };
+    var errors = validatePost(post);
+    if (errors.title || errors.url)
+      return Session.set('postSubmitErrors', errors);
 
     Meteor.call('postInsert', post, function (error, result) {
       if (error)
@@ -17,3 +20,16 @@ Template.postSubmit.events({
     });
   }
 });
+
+Template.postSubmit.created = function() {
+  Session.set('postSubmitErrors', {});
+};
+
+Template.postSubmit.helpers({
+  'errorClass': function(field) {
+    return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+  },
+  'errorMessage': function (field) {
+    return Session.get('postSubmitErrors')[field];
+  }
+})
