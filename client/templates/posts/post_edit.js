@@ -1,3 +1,16 @@
+Template.editPage.created = function() {
+  Session.set('postSubmitErrors', {});
+};
+
+Template.editPage.helpers({
+  'errorClass': function(field) {
+    return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
+  },
+  'errorMessage': function (field) {
+    return Session.get('postSubmitErrors')[field];
+  }
+})
+
 Template.editPage.events({
   'submit form': function(e) {
     e.preventDefault();
@@ -8,6 +21,10 @@ Template.editPage.events({
       url: $(e.target).find('[name=url]').val(),
       title: $(e.target).find('[name=title]').val()
     };
+
+    var errors = validatePost(postProperties);
+    if (errors.title || errors.url)
+      return Session.set('postSubmitErrors', errors);
 
     Meteor.call('postEdit', postProperties, function (error, result) {
       if (error)
