@@ -1,5 +1,5 @@
 Template.commentSubmit.created = function () {
-  Session.set('commentSubmitErrors');
+  Session.set('commentSubmitErrors', {});
 };
 
 Template.commentSubmit.helpers({
