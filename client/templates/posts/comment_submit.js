@@ -3,10 +3,10 @@ Template.commentSubmit.created = function () {
 };
 
 Template.commentSubmit.helpers({
-  'errorClass': function(field) {
+  errorClass: function(field) {
     return !!Session.get('commentSubmitErrors')[field] ? 'has-error' : '';
   },
-  'errorMessage': function (field) {
+  errorMessage: function (field) {
     return Session.get('commentSubmitErrors')[field];
   }
 });

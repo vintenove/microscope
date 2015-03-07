@@ -3,10 +3,10 @@ Template.editPage.created = function() {
 };
 
 Template.editPage.helpers({
-  'errorClass': function(field) {
+  errorClass: function(field) {
     return !!Session.get('postSubmitErrors')[field] ? 'has-error' : '';
   },
-  'errorMessage': function (field) {
+  errorMessage: function (field) {
     return Session.get('postSubmitErrors')[field];
   }
 })
