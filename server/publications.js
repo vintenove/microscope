@@ -7,7 +7,6 @@ Meteor.publish('comments', function(postId) {
   return Comments.find({postId : postId});
 });
 
-Meteor.publish('notifications', function(userId) {
-  check(userId, String);
-  return Notifications.find({userId : userId});
+Meteor.publish('notifications', function() {
+  return Notifications.find({userId : this.userId, read: false});
 });
